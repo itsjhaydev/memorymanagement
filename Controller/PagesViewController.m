@@ -13,10 +13,14 @@
 
 @implementation PagesViewController
 
-- (void)viewDidLoad {
+
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.pageCountTextField.delegate = self;
 }
+
 
 
 
@@ -25,12 +29,12 @@
     NSString *stringNumber = [[NSString alloc] initWithFormat:@"%@", self.pageCountTextField.text];
     self.pageCount = [stringNumber intValue];
     self.pageCountTextField.text = @"";
+    
+    
+    
+    [self.view endEditing:YES];
+    [stringNumber release];
 }
-
-
-
-
-
 
 - (void)dealloc 
 {

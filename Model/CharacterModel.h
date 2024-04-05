@@ -10,14 +10,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CharacterModel : NSObject
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSArray *speech;
-@property (nonatomic, strong) NSString *imageName;
-@property (nonatomic, strong) NSString *age;
-@property (nonatomic, strong) NSString *info;
-@property (nonatomic, strong) NSString *saying;
-@property (nonatomic, strong) NSString *coinPayout;
-@property (nonatomic, strong) NSString *payoutTime;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSArray *speech;
+@property (nonatomic, retain) NSString *imageName;
+@property (nonatomic, retain) NSString *detailIcon;
+@property (nonatomic, retain) NSString *age;
+@property (nonatomic, retain) NSString *info;
+@property (nonatomic, retain) NSString *saying;
+@property (nonatomic, retain) NSString *coinPayout;
+@property (nonatomic, retain) NSString *payoutTime;
 
 - (instancetype)initWithDictionary:(NSDictionary *)withDictionary;
 

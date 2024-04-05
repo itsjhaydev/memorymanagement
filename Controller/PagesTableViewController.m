@@ -30,7 +30,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.characters count] / self.count;
+    return ([self.arrayOfCharacters count] - 1) / self.count;
 }
 
 
@@ -39,7 +39,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"display_pages_cell" forIndexPath:indexPath];
     
     // Configure the cell...
-    NSString *textLabelTitle = [[NSString alloc] initWithFormat:@"Pages %ld", (long)(indexPath.row + 1)];
+    NSString *textLabelTitle = [[NSString alloc] initWithFormat:@"Pages %ld", indexPath.row + 1];
     
     cell.textLabel.text = textLabelTitle;
     

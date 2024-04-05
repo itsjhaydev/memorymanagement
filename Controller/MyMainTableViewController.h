@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MyMainTableViewController : UITableViewController
 @property(nonatomic) int count;
-@property (nonatomic, strong) NSArray *characters;
+@property (nonatomic, retain) NSArray *arrayOfCharacters;
 @end
 
 NS_ASSUME_NONNULL_END

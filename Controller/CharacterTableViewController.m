@@ -52,21 +52,25 @@
     
     long index = self.pageNumber * self.characterCount - self.characterCount + indexPath.row + 1;
     
-    CharacterModel *character = self.characters[index];
-    
-    int randomNumber = [self randomNumber:(int)character.speech.count];
+    CharacterModel *character = self.arrayOfCharacters[index];
+        
+    int randomNumber = [self randomNumber:(int)[character.speech count]];
+    NSString *speech = [[NSString alloc] initWithFormat:@"\"%@\"", character.speech[randomNumber]];
     
     cell.characterIcon.image = [UIImage imageNamed:character.imageName];
     cell.characterName.text = character.name;
-    cell.characterSpeech.text = character.speech[randomNumber];
-
+    cell.characterSpeech.text = speech;
+    cell.characterSpeech.font = [UIFont italicSystemFontOfSize:12];
+    
+    [speech release];
+    
     return cell;
 }
 
 
-- (int)randomNumber:(int)number
+- (int)randomNumber:(int)num
 {
-    number = arc4random_uniform(number);
+    int number = arc4random_uniform(num);
     return number;
 }
 
@@ -82,7 +86,9 @@
         if(indexPath) {
             if([segue.destinationViewController isKindOfClass:[DetailsViewController class]]) {
                 DetailsViewController *detailsVC = (DetailsViewController *)segue.destinationViewController;
-                detailsVC.characterDetails = self.characters[self.pageNumber * self.characterCount - self.characterCount + indexPath.row + 1];
+                long index = self.pageNumber * self.characterCount - self.characterCount + indexPath.row + 1;
+                CharacterModel *character = self.arrayOfCharacters[index];
+                detailsVC.characterDetails = character;
             }
         }
     }

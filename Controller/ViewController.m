@@ -43,10 +43,13 @@
     return YES;
 }
 
+static int MINIMUM_NUMBER = 1;
+static int MAXIMUM_NUMBER = 20;
+
 
 - (BOOL)isValidationSuccessful
 {
-    if( self.pageCount > 0 ) {
+    if( self.pageCount >= MINIMUM_NUMBER && self.pageCount <= MAXIMUM_NUMBER ) {
         return YES;
     }
     else {

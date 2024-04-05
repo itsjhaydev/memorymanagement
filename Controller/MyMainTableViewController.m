@@ -7,9 +7,6 @@
 
 #import "MyMainTableViewController.h"
 #import "../Model/CharacterModel.h"
-@interface MyMainTableViewController ()
-
-@end
 
 @implementation MyMainTableViewController
 
@@ -26,10 +23,12 @@
 }
 
 
-- (void)setCharacters:(NSArray *)characters
+- (void)setArrayOfCharacters:(NSArray *)arrayOfCharacters
 {
-    _characters = characters;
+    _arrayOfCharacters = arrayOfCharacters;
 }
+
+
 
 
 
@@ -44,9 +43,13 @@
     for( NSString *key in dataPlist ) {
         CharacterModel *characters = [[CharacterModel alloc] initWithDictionary:dataPlist[key]];
         [characterHolder addObject:characters];
+        [characters release];
     }
     
-    self.characters = characterHolder;
+    self.arrayOfCharacters = characterHolder;
+    
+    [stringEmpty release];
+    
 }
 
 #pragma mark - Table view data source
@@ -70,71 +73,11 @@
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)dealloc
+{
+    [_arrayOfCharacters release];
+    [super dealloc];
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
 
-
-
-//Bernardo
-//John
-//Larissa
-//Mika
-//Amelia
-//Clara
-//Sheldon
-//Horatio
-//Dewey
-//Oscar
-//Sabrina
-//Penelope
-//Elroy
-//Kato
-//Ellie
-//Caleb
-//Tom
-//Abby
-//Zack
-//Nadia

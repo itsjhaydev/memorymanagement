@@ -15,6 +15,7 @@
 #define SAYING_KEY @"saying"
 #define COIN_PAY_OUT_KEY @"coinPayout"
 #define PAY_OUT_TIME_KEY @"payoutTime"
+#define DETAIL_ICON_KEY @"jobs.1.detailIconKey"
 
 @implementation CharacterModel
 
@@ -23,20 +24,42 @@
 {
     self = [super init];
     if (self) {
-        _name = [withDictionary valueForKeyPath:NAME_KEY];
-        _speech = [withDictionary valueForKeyPath:SPEECH_KEY];
-        _imageName = [withDictionary valueForKeyPath:JOBS_KEY];
-        _age = [withDictionary valueForKeyPath:AGE_KEY];
-        _info = [withDictionary valueForKeyPath:INFO_KEY];
-        _saying = [withDictionary valueForKeyPath:SAYING_KEY];
-        _coinPayout = [withDictionary valueForKeyPath:COIN_PAY_OUT_KEY];
-        _payoutTime = [withDictionary valueForKeyPath:PAY_OUT_TIME_KEY];
+        NSString *name       = [[NSString alloc] initWithString:[withDictionary valueForKeyPath:NAME_KEY]];
+        NSArray *speech      = [[NSArray alloc] initWithArray:[withDictionary valueForKeyPath:SPEECH_KEY]];
+        NSString *imageName  = [[NSString alloc] initWithString:[withDictionary valueForKeyPath:JOBS_KEY]];
+        NSString *age        = [[NSString alloc] initWithString:[withDictionary valueForKeyPath:AGE_KEY]];
+        NSString *info       = [[NSString alloc] initWithString:[withDictionary valueForKeyPath:INFO_KEY]];
+        NSString *saying     = [[NSString alloc] initWithString:[withDictionary valueForKeyPath:SAYING_KEY]];
+        NSString *coinPayout = [[NSString alloc] initWithString:[withDictionary valueForKeyPath:COIN_PAY_OUT_KEY]];
+        NSString *payoutTime = [[NSString alloc] initWithString:[withDictionary valueForKeyPath:PAY_OUT_TIME_KEY]];
+        NSString *detailIcon = [[NSString alloc] initWithString:[withDictionary valueForKeyPath:DETAIL_ICON_KEY]];
+        _name       = name;
+        _speech     = speech;
+        _imageName  = imageName;
+        _age        = age;
+        _info       = info;
+        _saying     = saying;
+        _coinPayout = coinPayout;
+        _payoutTime = payoutTime;
+        _detailIcon = detailIcon;
     }
     return self;
 }
 
 
 
-
+- (void)dealloc
+{
+    [_name release];
+    [_speech release];
+    [_imageName release];
+    [_age release];
+    [_info release];
+    [_saying release];
+    [_coinPayout release];
+    [_payoutTime release];
+    [_detailIcon release];
+    [super dealloc];
+}
 
 @end

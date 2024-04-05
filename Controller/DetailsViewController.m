@@ -10,15 +10,15 @@
 @interface DetailsViewController ()
 @property (retain, nonatomic) IBOutlet UIImageView *characterImageIcon;
 @property (retain, nonatomic) IBOutlet UILabel *characterAge;
-@property (retain, nonatomic) IBOutlet UILabel *characterInformation;
+@property (retain, nonatomic) IBOutlet UITextView *characterInformation;
 @property (retain, nonatomic) IBOutlet UILabel *characterSaying;
 @property (retain, nonatomic) IBOutlet UILabel *characterIncome;
 @property (retain, nonatomic) IBOutlet UILabel *characterJob;
-@property (nonatomic, strong) NSMutableAttributedString *attributedName;
-@property (nonatomic, strong) NSMutableAttributedString *attributedAge;
-@property (nonatomic, strong) NSMutableAttributedString *attributedInfo;
-@property (nonatomic, strong) NSMutableAttributedString *attributedSaying;
-@property (nonatomic, strong) NSMutableAttributedString *attributedIncome;
+@property (nonatomic, retain) NSMutableAttributedString *attributedAge;
+@property (nonatomic, retain) NSMutableAttributedString *attributedInfo;
+@property (nonatomic, retain) NSMutableAttributedString *attributedSaying;
+@property (nonatomic, retain) NSMutableAttributedString *attributedIncome;
+@property (nonatomic, retain) NSMutableAttributedString *attributedJob;
 @end
 
 @implementation DetailsViewController
@@ -35,65 +35,68 @@
 {
     [self changeTextColor];
     
-    self.characterImageIcon.image = [UIImage imageNamed:self.characterDetails.imageName];
+    self.characterImageIcon.image = [UIImage imageNamed:self.characterDetails.detailIcon];
     self.characterAge.attributedText = self.attributedAge;
     self.characterInformation.attributedText = self.attributedInfo;
     self.characterSaying.attributedText = self.attributedSaying;
     self.characterIncome.attributedText = self.attributedIncome;
-    self.characterJob.attributedText = self.attributedName;
+    self.characterJob.attributedText = self.attributedJob;
+    
+    
+    self.characterInformation.font = [UIFont systemFontOfSize:14];
+    self.characterInformation.textAlignment = NSTextAlignmentRight;
 }
 
 
 - (void)changeTextColor
 {
-    NSMutableAttributedString *name = [[NSMutableAttributedString alloc] initWithString:self.characterDetails.name];
+    NSMutableAttributedString *job = [[NSMutableAttributedString alloc] initWithString:self.characterDetails.imageName];
     NSMutableAttributedString *age = [[NSMutableAttributedString alloc] initWithString:self.characterDetails.age];
-//    NSMutableAttributedString *info = [[NSMutableAttributedString alloc] initWithString:self.characterDetails.info];
-//    NSMutableAttributedString *saying = [[NSMutableAttributedString alloc] initWithString:self.characterDetails.saying];
-    NSMutableAttributedString *coinPayout = [[NSMutableAttributedString alloc] initWithString:self.characterDetails.coinPayout];
-    NSMutableAttributedString *slash = [[NSMutableAttributedString alloc] initWithString:@" / "];
-    NSMutableAttributedString *payoutTime = [[NSMutableAttributedString alloc] initWithString:self.characterDetails.payoutTime];
-    NSMutableAttributedString *income = [[NSMutableAttributedString alloc] init];
+    NSMutableAttributedString *info = [[NSMutableAttributedString alloc] initWithString:self.characterDetails.info];
+    NSMutableAttributedString *saying = [[NSMutableAttributedString alloc] initWithString:self.characterDetails.saying];
+    NSString *incomeString = [[NSString alloc] initWithFormat:@"%@ / %@", self.characterDetails.coinPayout, self.characterDetails.payoutTime];
+    NSMutableAttributedString *income = [[NSMutableAttributedString alloc] initWithString:incomeString];
     
-    [income appendAttributedString:coinPayout];
-    [income appendAttributedString:slash];
-    [income appendAttributedString:payoutTime];
+    [job addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, job.length)];
     
-    [name addAttributes:@{
-        NSForegroundColorAttributeName : [UIColor blueColor]
-    } range:NSMakeRange(0, name.length)];
+    [age addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, age.length)];
     
-    [age addAttributes:@{
-        NSForegroundColorAttributeName : [UIColor blueColor]
-    } range:NSMakeRange(0, age.length)];
+    [info addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, info.length)];
     
-//    [info addAttributes:@{
-//        NSForegroundColorAttributeName : [UIColor blueColor]
-//    } range:NSMakeRange(0, info.length)];
+    [saying addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, saying.length)];
     
-//    [saying addAttributes:@{
-//        NSForegroundColorAttributeName : [UIColor blueColor]
-//    } range:NSMakeRange(0, saying.length)];
+    [income addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, income.length)];
     
-    [income addAttributes:@{
-        NSForegroundColorAttributeName : [UIColor blueColor]
-    } range:NSMakeRange(0, income.length)];
-    
-    self.attributedName = name;
+    self.attributedJob = job;
     self.attributedAge = age;
-//    self.attributedInfo = info;
-//    self.attributedSaying = saying;
+    self.attributedInfo = info;
+    self.attributedSaying = saying;
     self.attributedIncome = income;
+    
+    
+    [incomeString release];
+    [income release];
+    [age release];
+    [job release];
+    [info release];
+    [saying release];
 }
 
 
-- (void)dealloc {
+- (void)dealloc
+{
     [_characterImageIcon release];
     [_characterAge release];
     [_characterInformation release];
     [_characterSaying release];
     [_characterIncome release];
     [_characterJob release];
+    [_attributedAge release];
+    [_attributedInfo release];
+    [_attributedSaying release];
+    [_attributedIncome release];
+    [_attributedJob release];
+    [_characterDetails release];
     [super dealloc];
 }
 @end

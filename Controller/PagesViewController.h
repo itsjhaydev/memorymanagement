@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PagesViewController : ViewController
+@interface PagesViewController : ViewController <UITextFieldDelegate>
 
 @end
 

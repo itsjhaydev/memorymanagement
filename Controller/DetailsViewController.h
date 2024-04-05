@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailsViewController : ViewController
-@property (nonatomic, strong) CharacterModel *characterDetails;
+@property (nonatomic, retain) CharacterModel *characterDetails;
 @end
 
 NS_ASSUME_NONNULL_END
